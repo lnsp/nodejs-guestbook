@@ -6,15 +6,15 @@ html
         .container.mt-3
             h1= title
             hr
-            form(action="/submit")
+            form(action="/submit", method="POST")
                 .form-group
-                    label(for="text") Submission
-                    textarea.form-control(name="text", cols="30", rows="3")
+                    textarea.form-control(name="message", cols="30", rows="3", placeholder="My dear Frodo, ...")
                 .form-group
-                    label(for="name") Author
-                    input.form-control(name="name", type="text")
+                    input.form-control(name="author", type="text", placeholder="Bilbo Baggins")
                 button.btn.btn-primary(role="submit") Submit
             hr
             each entry in submissions
                 .container
-                    
+                    p= entry.message
+                    small.text-muted submitted by #{entry.author} on #{entry.date}
+                hr

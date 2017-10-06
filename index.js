@@ -1,34 +1,51 @@
 // load express framework
 var bodyParser = require('body-parser')
 var express = require('express')
+var humanDate = require('human-date')
+var mongojs = require('mongojs')
 var urlEncoding = bodyParser.urlencoded({ extended: false })
 var app = express()
 
-var submissions = [{
-  text: 'My dear Frodo, you asked me once if I had told you everything there was to know about my adventures. And while I can honestly say I have told you the truth, I may not have told you all of it. I am old now, Frodo. I\'m not the same hobbit as I once was. I think it is time for you to know what really happened.',
-  name: 'Bilbo Baggins'
-}]
+var db = mongojs(process.env.DB_URL)
+var submissions = db.collection('submissions')
 
 // set render engine
 app.set('view engine', 'pug')
 
 // handle post submission
 app.post('/submit', urlEncoding, function (req, res) {
-  var entry = {
-    text: req.body.text,
-    name: req.body.name
+  if (req.body.message === '' || req.body.author === '') {
+    res.redirect('/')
+    return
   }
-  console.log('submitted guestbook entry %s', entry)
-  submissions.push(entry)
-  res.redirect('/')
+
+  // insert submission into database
+  submissions.insert({
+    message: req.body.message,
+    author: req.body.author,
+    date: humanDate.prettyPrint(new Date())
+  }, function (err) {
+    if (err != null) {
+      res.write('Could not save submission. Please try again later.')
+    } else {
+      res.redirect('/')
+    }
+  })
 })
 
 // handle guestbook listing
 app.get('/', function (req, res) {
-  res.render('index', { title: 'Guestbook', submissions: submissions })
+  submissions.find(function (err, docs) {
+    if (err != null) {
+      res.write('error while reading from database. please try again later.')
+      console.log(err)
+    } else {
+      res.render('index', { title: 'Guestbook', submissions: docs })
+    }
+  })
 })
 
-var server = app.listen(process.env.PORT, function () {
+var server = app.listen(process.env.WEB_PORT, process.env.WEB_HOST, function () {
   var host = server.address().address
   var port = server.address().port
 
