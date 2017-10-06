@@ -14,7 +14,7 @@ html
                 button.btn.btn-primary(role="submit") Submit
             hr
             each entry in submissions
-                .container
+                div
                     p= entry.message
                     small.text-muted submitted by #{entry.author} on #{entry.date}
                 hr
