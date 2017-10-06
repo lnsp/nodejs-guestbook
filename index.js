@@ -27,7 +27,7 @@ app.post("/submit", urlEncoding, function(req, res) {
 
 // handle guestbook listing
 app.get("/", function(req, res) {
-    res.render("index", { title: "Guestbook" });
+    res.render("index", { title: "Guestbook", submissions: guestbook });
 })
 
 var server = app.listen(process.env.PORT, function() {

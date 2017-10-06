@@ -1,8 +1,20 @@
 html
     head
         title= title
+        link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css")
     body
-        h1= title
-        ul
-            each val in [1, 2, 3]
-                li= val
+        .container.mt-3
+            h1= title
+            hr
+            form(action="/submit")
+                .form-group
+                    label(for="text") Submission
+                    textarea.form-control(name="text", cols="30", rows="3")
+                .form-group
+                    label(for="name") Author
+                    input.form-control(name="name", type="text")
+                button.btn.btn-primary(role="submit") Submit
+            hr
+            each entry in submissions
+                .container
+                    
