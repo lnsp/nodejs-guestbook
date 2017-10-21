@@ -6,7 +6,7 @@ var mongojs = require('mongojs')
 var urlEncoding = bodyParser.urlencoded({ extended: false })
 var app = express()
 
-var db = mongojs(process.env.DB_URL)
+var db = mongojs(process.env.MONGO_URL)
 var submissions = db.collection('submissions')
 
 // set render engine
@@ -45,7 +45,7 @@ app.get('/', function (req, res) {
   })
 })
 
-var server = app.listen(process.env.WEB_PORT, process.env.WEB_HOST, function () {
+var server = app.listen(process.env.PORT, function () {
   var host = server.address().address
   var port = server.address().port
 
