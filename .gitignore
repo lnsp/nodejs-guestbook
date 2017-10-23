@@ -1,1 +1,3 @@
 node_modules
+.travis/*_key
+.travis/*_key.pub
