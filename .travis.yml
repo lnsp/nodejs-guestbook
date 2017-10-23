@@ -1,3 +1,6 @@
 language: node_js
 node_js:
-    - "8"
+- '8'
+before_install:
+- openssl aes-256-cbc -K $encrypted_590739c235a5_key -iv $encrypted_590739c235a5_iv
+  -in .travis/deploy_key.enc -out .travis/deploy_key -d
