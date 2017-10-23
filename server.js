@@ -3,7 +3,9 @@ var bodyParser = require('body-parser')
 var express = require('express')
 var humanDate = require('human-date')
 var mongojs = require('mongojs')
-var urlEncoding = bodyParser.urlencoded({ extended: false })
+var urlEncoding = bodyParser.urlencoded({
+  extended: false
+})
 var app = express()
 
 var db = mongojs(process.env.MONGO_URL)
@@ -26,7 +28,7 @@ app.post('/submit', urlEncoding, function (req, res) {
     date: humanDate.prettyPrint(new Date())
   }, function (err) {
     if (err != null) {
-      res.write('Could not save submission. Please try again later.')
+      res.write('could not save submission. please try again later.')
     } else {
       res.redirect('/')
     }
@@ -40,7 +42,10 @@ app.get('/', function (req, res) {
       res.write('error while reading from database. please try again later.')
       console.log(err)
     } else {
-      res.render('index', { title: 'Guestbook', submissions: docs })
+      res.render('index', {
+        title: 'Guestbook',
+        submissions: docs
+      })
     }
   })
 })
