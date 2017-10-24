@@ -2,8 +2,11 @@ html
     head
         title= title
         link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css")
+        script(src="https://code.jquery.com/jquery-3.1.1.slim.min.js")
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js")
+        script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js")
     body
-        .container.mt-3
+        .container.mt-4
             h1= title
             hr
             form(action="/submit", method="POST")
@@ -14,7 +17,7 @@ html
                 button.btn.btn-primary(role="submit") Submit
             hr
             each entry in submissions
-                div
-                    p= entry.message
-                    small.text-muted submitted by #{entry.author} on #{entry.date}
+                .container
+                    h6.card-subtitle.text-muted submitted by #{entry.author} on #{entry.date}
+                    p.card-text= entry.message
                 hr
