@@ -1,10 +1,10 @@
 html
     head
         title= title
-        link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css")
-        script(src="https://code.jquery.com/jquery-3.1.1.slim.min.js")
-        script(src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js")
-        script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js")
+        link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css")
+        script(src="https://code.jquery.com/jquery-3.2.1.slim.min.js")
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js")
+        script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js")
     body
         .container.mt-4
             h1= title
@@ -16,8 +16,11 @@ html
                     input.form-control(name="author", type="text", placeholder="Bilbo Baggins")
                 button.btn.btn-primary(role="submit") Submit
             hr
-            each entry in submissions
-                .container
-                    h6.card-subtitle.text-muted submitted by #{entry.author} on #{entry.date}
-                    p.card-text= entry.message
-                hr
+            .row
+                each entry in submissions
+                    .col-sm-6.mt-3
+                        .card
+                            .card-body
+                                blockquote.blockquote.mb-0
+                                    p= entry.message
+                                    footer.blockquote-footer submitted by #{entry.author} on #{entry.date}
