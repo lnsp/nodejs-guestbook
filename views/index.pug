@@ -1,26 +1,20 @@
-html
-    head
-        title= title
-        link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css")
-        script(src="https://code.jquery.com/jquery-3.2.1.slim.min.js")
-        script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js")
-        script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js")
-    body
-        .container.mt-4
-            h1= title
-            hr
-            form(action="/submit", method="POST")
-                .form-group
-                    textarea.form-control(name="message", cols="30", rows="3", placeholder="My dear Frodo, ...")
-                .form-group
-                    input.form-control(name="author", type="text", placeholder="Bilbo Baggins")
-                button.btn.btn-primary(role="submit") Submit
-            hr
-            .row
-                each entry in submissions
-                    .col-sm-6.mt-3
-                        .card
-                            .card-body
-                                blockquote.blockquote.mb-0
-                                    p= entry.message
-                                    footer.blockquote-footer submitted by #{entry.author} on #{entry.date}
+extends layout.pug
+
+block content
+    form(action="/submit", method="POST")
+        .form-group
+            label.col-form-label Your message
+            textarea.form-control(name="message", cols="30", rows="3", placeholder="My dear Frodo, ...")
+            .form-group
+                label.col-form-label Your name
+                input.form-control(name="author", type="text", placeholder="Bilbo Baggins")
+            button.btn.btn-primary(role="submit") Submit
+    hr
+    .row
+        each entry in submissions
+            .col-sm-6.mt-3
+                .card
+                    .card-body
+                        blockquote.blockquote.mb-0
+                            p= entry.message
+                            footer.blockquote-footer #{entry.author} on #{entry.date}

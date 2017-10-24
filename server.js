@@ -7,6 +7,7 @@ var urlEncoding = bodyParser.urlencoded({
   extended: false
 })
 var app = express()
+var package = require('./package.json')
 
 var db = mongojs(process.env.MONGO_URL)
 var submissions = db.collection('submissions')
@@ -14,7 +15,9 @@ var submissions = db.collection('submissions')
 // set render engine
 app.set('view engine', 'pug')
 
-// handle post submission
+app.use(express.static('static/'))
+
+// handle post submissio
 app.post('/submit', urlEncoding, function (req, res) {
   if (req.body.message === '' || req.body.author === '') {
     res.redirect('/')
@@ -35,6 +38,13 @@ app.post('/submit', urlEncoding, function (req, res) {
   })
 })
 
+app.get('/privacy', function (req, res) {
+  res.render('terms', {
+    title: 'Guestbook',
+    version: package.version
+  })
+})
+
 // handle guestbook listing
 app.get('/', function (req, res) {
   submissions.find(function (err, docs) {
@@ -44,6 +54,7 @@ app.get('/', function (req, res) {
     } else {
       res.render('index', {
         title: 'Guestbook',
+        version: package.version,
         submissions: docs
       })
     }

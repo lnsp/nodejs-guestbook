@@ -1,0 +1,23 @@
+html
+    head
+        title= title
+        link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css")
+        script(src="https://code.jquery.com/jquery-3.2.1.slim.min.js")
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js")
+        script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js")
+        link(rel="stylesheet", href="/css/footer.css")
+    body
+        .container.mt-4
+            h1 
+                | #{title} 
+                small.text-muted v#{version}
+            hr
+            block content
+        footer.footer
+            .container
+                .text-muted
+                    a(href="https://github.com/lnsp") &copy; 2017 lnsp 
+                    | — 
+                    a(href="mailto:lennart@espe.tech") Contact me 
+                    | — 
+                    a(href="/privacy") Terms of Service & Privacy policy
