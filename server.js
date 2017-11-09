@@ -9,7 +9,7 @@ var urlEncoding = bodyParser.urlencoded({
 var app = express()
 var package = require('./package.json')
 
-var db = mongojs(process.env.MONGO_URL)
+var db = mongojs(process.env.DATABASE_URL)
 var submissions = db.collection('submissions')
 
 // set render engine
