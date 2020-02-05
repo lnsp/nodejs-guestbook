@@ -12,6 +12,6 @@ $ npm install
 ## Running the server
 ```bash
 $ export PORT=8080 # set the http port
-$ export MONGO_URL="mongodb://my-database:27017/guestbook" # set the database url
+$ export DATABASE_URL="mongodb://my-database:27017/guestbook" # set the database url
 $ npm start
 ```
