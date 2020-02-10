@@ -7,7 +7,7 @@ services:
     depends_on:
     - database
     environment:
-    - MONGO_URL=mongodb://database:27017/guestbook
+    - DATABASE_URL=mongodb://database:27017/guestbook
     - PORT=8080
     volumes:
     - ./:/home/node/app
