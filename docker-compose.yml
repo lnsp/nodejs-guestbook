@@ -1,18 +1,13 @@
 version: "3"
 services:
   web:
-    image: "node:8"
-    user: "node"
-    working_dir: /home/node/app
+    build: .
     depends_on:
     - database
     environment:
     - DATABASE_URL=mongodb://database:27017/guestbook
     - PORT=8080
-    volumes:
-    - ./:/home/node/app
     ports:
     - "80:8080"
-    command: "npm start"
   database:
     image: "mongo"
