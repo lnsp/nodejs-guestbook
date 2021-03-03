@@ -13,7 +13,7 @@
     "express": "^4.16.1",
     "human-date": "^1.4.0",
     "mongojs": "^2.4.1",
-    "pug": "^2.0.0-rc.4"
+    "pug": "^3.0.1"
   },
   "repository": {
     "url": "https://github.com/lnsp/nodejs-guestbook"
